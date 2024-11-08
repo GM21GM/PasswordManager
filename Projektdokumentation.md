@@ -57,7 +57,7 @@ Wir erstellen eine Passwort Manager Extension welche man brauchen kann um sich P
 | ---- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | 01    |  8.11.24        |    Innamorato, Bischof       |          Informieren|     120   |
 | 02    |  8.11.24        |       Martullo  |  Planen des Projektablaufs      |   120      |
-| 03    |  8.11.24        |         |        |            |
+| 03    |  8.11.24        |     Innamorato    |    Demo erstellen    |    120         |
 | 04    |  8.11.24        |         |        |               |
 | 05    |  8.11.24        |         |        |            |
 | 06    |  8.11.24        |         |        |             |
