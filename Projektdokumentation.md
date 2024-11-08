@@ -55,14 +55,19 @@ Wir erstellen eine Passwort Manager Extension welche man brauchen kann um sich P
 
 | AP-№ | Frist    | Zuständig | Beschreibung                                                                                                          | geplante Zeit (Minuten) |
 | ---- | -------- | --------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| 1    |          |           |                                                                                                                       |                         |
-| 2    |          |           |                                                                                                                       |                         |
-| 3    |          |           |                                                                                                                       |                         |
-| 4    |          |           |                                                                                                                       |                         |
-| 5    |          |           |                                                                                                                       |                         |
-| 6    |          |           |                                                                                                                       |                         |
-| 7    |          |           |                                                                                                                       |                         |
-| 8    |          |           |                                                                                                                       |                         |
+| 01    |  8.11.24        |    Innamorato, Bischof       |          Informieren|     120   |
+| 02    |  8.11.24        |       Martullo  |  Planen des Projektablaufs      |   120      |
+| 03    |  8.11.24        |         |        |            |
+| 04    |  8.11.24        |         |        |               |
+| 05    |  8.11.24        |         |        |            |
+| 06    |  8.11.24        |         |        |             |
+| 07    |  8.11.24        |         |        |            |
+| 08    |  8.11.24        |         |        |            |
+| 09    |  8.11.24        |         |        |              |
+| 10    |  8.11.24        |         |        |              |
+| 11    |  13.12.24        |    Martullo     |  Projekt Testen      | 120             |
+| 12    |  20.12.24        |   Innamorato, Bischof, Martullo      |   Verfassen des Portfolios, Fertigstellung Projektdokumentation     |      180    |
+
 ## 3 Entscheiden
 ## 4 Realisieren
 
