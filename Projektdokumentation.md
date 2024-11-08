@@ -75,7 +75,7 @@ Wir erstellen eine Passwort Manager Extension welche man brauchen kann um sich P
 | ---- | -------- | -------------------------- | ------------- | ----------------- |
 | 1    |          |                            |               |                   |
 | 2    |          |                            |               |                   |
-| 3    |          |                            |               |                   |
+| 3    |08.11|Innamorato|120'|180'|
 | 4    |          |                            |               |                   |
 | 5    |          |                            |               |                   |
 | 6    |          |                            |               |                   |
