@@ -12,8 +12,8 @@ Teammitglieder: **Innamorato Giovanni**, Bischof Gabriel, Martullo Giuliano
 
 | Datum    | Version | Zusammenfassung                                                          |
 | -------- | ------- | ------------------------------------------------------------------------ |
-|   01.11.2024       |  1.0       |  Wir haben uns für ein Projekt entschieden und den Projektantrag an Herr Thut geschickt.                                                                        |
-
+|   01.11.2024       |  1.0       |  Wir haben uns für ein Projekt entschieden und den Projektantrag an Herr Thut geschickt.   |
+|  08.11.2024|1.1|
 ## 1 Informieren
 
 ### 1.1 Ihr Projekt
@@ -21,16 +21,19 @@ Teammitglieder: **Innamorato Giovanni**, Bischof Gabriel, Martullo Giuliano
 Wir erstellen eine Passwort Manager Extension welche man brauchen kann um sich Passwörter generieren zu lassen so wie um sie verschlüsselt Speichern zu lassen.
 ### 1.2 User Stories
 
-| US-№ | Verbindlichkeit | Typ (Funktional oder Qualität) | Beschreibung                                                                                                                            |
-| ---- | --------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 1    |                 |     |                                                                                                                                         |
-| 2    |                 |     |                                                                                                                                         |
-| 3    |                 |     |                                                                                                                                         |
-| 4    |                 |     |                                                                                                                                         |
-| 5    |                 |     |                                                                                                                                         |
-| 6    |                 |     |                                                                                                                                         |
-| 7    |                 |     |                                                                                                                                         |
-| 8    |                 |     |                                                                                                                                         |
+### 1.2 User Stories
+
+| US-№ | Verbindlichkeit | Typ               | Beschreibung                                                                                                                                                |
+| ---- | --------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Muss            | Funktional        | Als Nutzer möchte ich ein sicheres Passwort generieren können, um sicherzustellen, dass meine Konten gut geschützt sind.                                     |
+| 2    | Muss            | Funktional        | Als Nutzer möchte ich das generierte Passwort in einer verschlüsselten Datenbank speichern können, damit es nur für mich zugänglich ist.                     |
+| 3    | Muss            | Funktional        | Als Nutzer möchte ich gespeicherte Passwörter durchsuchen können, um bei Bedarf einfach auf die Passwörter meiner Konten zugreifen zu können.                 |
+| 4    | Sollte          | Funktional        | Als Nutzer möchte ich ein generiertes Passwort anpassen können (z.B. Länge, Zeichenarten), um spezifischen Anforderungen gerecht zu werden.                  |
+| 5    | Sollte          | Funktional        | Als Nutzer möchte ich meine Passwörter in der Zwischenablage speichern können, um sie schnell in andere Anwendungen einfügen zu können.                      |
+| 6    | Muss            | Qualität          | Als Nutzer möchte ich sicherstellen, dass meine gespeicherten Passwörter verschlüsselt sind, damit meine Daten auch bei Verlust der Datenbank geschützt sind.|
+| 7    | Sollte          | Funktional        | Als Nutzer möchte ich eine Möglichkeit haben, gespeicherte Passwörter zu löschen, um meine Daten aktuell und relevant zu halten.                             |
+| 8    | Kann            | Funktional        | Als Nutzer möchte ich eine Funktion zur Passwortstärke-Anzeige haben, um zu sehen, ob das generierte Passwort sicher genug ist.                              |
+
 
 ### 1.3 Testfälle
 
