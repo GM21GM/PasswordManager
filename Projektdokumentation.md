@@ -69,6 +69,7 @@ Wir erstellen eine Passwort Manager Extension welche man brauchen kann um sich P
 | 12    |  20.12.24        |   Innamorato, Bischof, Martullo      |   Verfassen des Portfolios, Fertigstellung Projektdokumentation     |      180    |
 
 ## 3 Entscheiden
+Wir sind von Vue.js abgewichen, da es bei uns nicht funktioniert hat. Daraufhin haben wir uns dazu entschieden, das Projekt mit vite, react und javascript fortzufahren.
 ## 4 Realisieren
 
 | AP-№ | Datum    | Zuständig                  | Geplante Zeit | Tatsächliche Zeit |
