@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Passwoird Manager",
+  "description": "a password manager",
+  "version": "1.0.0",
+  "icons": {
+    "32": "/images/icon-32.png",
+    "128": "/images/icon-128.png"
+  },
+  "background": {},
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
