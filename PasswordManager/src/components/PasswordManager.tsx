@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import PasswordList from './PasswordList';  // Korrekt: Relativer Pfad
-import PasswordForm from './PasswordForm';  // Korrekt: Relativer Pfad
+import PasswordForm from './PasswordForm';
+import PasswordList from './PasswordList';
 
 interface Password {
   id: string;
@@ -14,23 +14,23 @@ const PasswordManager: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentPassword, setCurrentPassword] = useState<Password | null>(null);
 
-  // Laden der Passwörter aus dem Speicher
+  // Lädt die gespeicherten Passwörter aus chrome.storage.local
   useEffect(() => {
     chrome.storage.local.get('passwords', (result) => {
       if (result.passwords) {
-        setPasswords(result.passwords as Password[]); // Explizite Typisierung
+        setPasswords(result.passwords);
       }
     });
   }, []);
 
-  // Speichern von Passwörtern im Chrome Storage
+  // Speichert die Passwörter im chrome.storage.local
   const savePasswords = (newPasswords: Password[]) => {
     chrome.storage.local.set({ passwords: newPasswords }, () => {
-      setPasswords(newPasswords);
+      setPasswords(newPasswords); // Update State nach dem Speichern
     });
   };
 
-  // Passwort hinzufügen oder aktualisieren
+  // Füge neues Passwort hinzu oder aktualisiere bestehendes
   const addOrUpdatePassword = (newPassword: Password) => {
     if (isEditing && currentPassword) {
       const updatedPasswords = passwords.map((password) =>
@@ -40,11 +40,11 @@ const PasswordManager: React.FC = () => {
     } else {
       savePasswords([...passwords, newPassword]);
     }
-    setIsEditing(false);
-    setCurrentPassword(null);
+    setIsEditing(false); // Setze den Editiermodus zurück
+    setCurrentPassword(null); // Setze das bearbeitete Passwort zurück
   };
 
-  // Passwort löschen
+  // Lösche ein Passwort
   const deletePassword = (id: string) => {
     const updatedPasswords = passwords.filter((password) => password.id !== id);
     savePasswords(updatedPasswords);
