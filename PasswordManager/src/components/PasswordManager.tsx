@@ -1,53 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import PasswordForm from './PasswordForm';
 import PasswordList from './PasswordList';
+import PasswordEncryption from '../utils/CryptoUtils'; 
 
 interface Password {
   id: string;
   website: string;
   username: string;
-  password: string;
+  password: string;  // Verschlüsseltes Passwort wird gespeichert
 }
 
 const PasswordManager: React.FC = () => {
   const [passwords, setPasswords] = useState<Password[]>([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentPassword, setCurrentPassword] = useState<Password | null>(null);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);  // Für Passwortsichtbarkeit
 
-  // Lädt die gespeicherten Passwörter aus chrome.storage.local
+  // Secret Key (müsste idealerweise sicher gespeichert werden, nicht hartkodiert)
+  const secretKey = 'your-secret-key';
+
+  // Load passwords from chrome.storage.local and decrypt them
   useEffect(() => {
     chrome.storage.local.get('passwords', (result) => {
       if (result.passwords) {
-        setPasswords(result.passwords);
+        // Entschlüsselung der Passwörter nach dem Laden
+        const decryptedPasswords = result.passwords.map((password: Password) => {
+          const decryptedPassword = PasswordEncryption.decryptPassword(password.password, secretKey);
+          return { ...password, password: decryptedPassword };
+        });
+        setPasswords(decryptedPasswords);
       }
     });
   }, []);
 
-  // Speichert die Passwörter im chrome.storage.local
+  // Speichern von Passwörtern, dabei werden die Passwörter vor dem Speichern verschlüsselt
   const savePasswords = (newPasswords: Password[]) => {
-    chrome.storage.local.set({ passwords: newPasswords }, () => {
-      setPasswords(newPasswords); // Update State nach dem Speichern
+    const encryptedPasswords = newPasswords.map((password: Password) => {
+      const encryptedPassword = PasswordEncryption.encryptPassword(password.password, secretKey);
+      return { ...password, password: encryptedPassword };
+    });
+    chrome.storage.local.set({ passwords: encryptedPasswords }, () => {
+      setPasswords(newPasswords);
     });
   };
 
-  // Füge neues Passwort hinzu oder aktualisiere bestehendes
+  // Hinzufügen oder Aktualisieren eines Passworts
   const addOrUpdatePassword = (newPassword: Password) => {
+    const encryptedPassword = PasswordEncryption.encryptPassword(newPassword.password, secretKey);
+    const passwordWithEncryptedPassword = {
+      ...newPassword,
+      password: encryptedPassword,
+    };
+
     if (isEditing && currentPassword) {
       const updatedPasswords = passwords.map((password) =>
-        password.id === currentPassword.id ? newPassword : password
+        password.id === currentPassword.id ? passwordWithEncryptedPassword : password
       );
       savePasswords(updatedPasswords);
     } else {
-      savePasswords([...passwords, newPassword]);
+      savePasswords([...passwords, passwordWithEncryptedPassword]);
     }
-    setIsEditing(false); // Setze den Editiermodus zurück
-    setCurrentPassword(null); // Setze das bearbeitete Passwort zurück
+
+    setIsEditing(false);
+    setCurrentPassword(null);
   };
 
-  // Lösche ein Passwort
+  // Löschen eines Passworts
   const deletePassword = (id: string) => {
     const updatedPasswords = passwords.filter((password) => password.id !== id);
     savePasswords(updatedPasswords);
+  };
+
+  // Passwort-Sichtbarkeit umschalten
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
   };
 
   return (
@@ -65,6 +91,8 @@ const PasswordManager: React.FC = () => {
           setCurrentPassword(password);
         }}
         onDelete={deletePassword}
+        isPasswordVisible={isPasswordVisible}  // Sichtbarkeitszustand übergeben
+        togglePasswordVisibility={togglePasswordVisibility}  // Funktion für Sichtbarkeitsumschaltung übergeben
       />
     </div>
   );

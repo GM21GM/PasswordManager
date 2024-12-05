@@ -1,6 +1,3 @@
-import React from 'react';
-import {PasswordItem} from './PasswordItem';
-
 interface Password {
   id: string;
   website: string;
@@ -12,26 +9,27 @@ interface PasswordListProps {
   passwords: Password[];
   onEdit: (password: Password) => void;
   onDelete: (id: string) => void;
+  isPasswordVisible: boolean;
+  togglePasswordVisibility: () => void;
 }
 
-const PasswordList: React.FC<PasswordListProps> = ({ passwords, onEdit, onDelete }) => {
+const PasswordList: React.FC<PasswordListProps> = ({ passwords, onEdit, onDelete, isPasswordVisible, togglePasswordVisibility }) => {
   return (
-    <div className="mt-8">
-      <h2 className="text-2xl font-semibold mb-4">Gespeicherte Passwörter</h2>
-      {passwords.length === 0 ? (
-        <p className="text-center text-gray-500">Keine Passwörter gespeichert.</p>
-      ) : (
-        <ul>
-          {passwords.map((password) => (
-            <PasswordItem
-              key={password.id}
-              password={password}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          ))}
-        </ul>
-      )}
+    <div>
+      <button onClick={togglePasswordVisibility}>
+        {isPasswordVisible ? 'Hide Passwords' : 'Show Passwords'}
+      </button>
+      <ul>
+        {passwords.map((password) => (
+          <li key={password.id}>
+            <span>{password.website}</span>
+            <span>{password.username}</span>
+            <span>{isPasswordVisible ? password.password : '********'}</span>
+            <button onClick={() => onEdit(password)}>Edit</button>
+            <button onClick={() => onDelete(password.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

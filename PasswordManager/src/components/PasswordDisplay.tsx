@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
-import { decryptPassword } from '../utils/passwordutils';
-interface PasswordRetrieveProps {
+import PasswordEncryption from '../utils/CryptoUtils';  // Import the PasswordEncryption utility
+
+interface PasswordDisplayProps {
   website: string;
-  secretKey: string;
+  secretKey: string;  // The secret key will be passed as a prop
 }
 
-const PasswordRetrieve: React.FC<PasswordRetrieveProps> = ({ website, secretKey }) => {
+const PasswordDisplay: React.FC<PasswordDisplayProps> = ({ website, secretKey }) => {
   const [decryptedPassword, setDecryptedPassword] = useState<string | null>(null);
 
   const handleRetrievePassword = () => {
+    // Retrieve the encrypted password from chrome storage using the website as the key
     chrome.storage.local.get([website], (result) => {
-      if (result[website]) {
-        const encryptedPassword = result[website];
-        const password = decryptPassword(encryptedPassword, secretKey);
+      // Ensure that the result has the expected structure
+      if (result && result[website]) {
+        const encryptedPassword = result[website];  // The encrypted password is retrieved
+        
+        // Use the secretKey from props to decrypt the password
+        const password = PasswordEncryption.decryptPassword(encryptedPassword, secretKey); 
         setDecryptedPassword(password);
       } else {
+        // If no password was found for the given website
         setDecryptedPassword(null);
       }
     });
@@ -22,10 +28,11 @@ const PasswordRetrieve: React.FC<PasswordRetrieveProps> = ({ website, secretKey 
 
   return (
     <div>
-      <button onClick={handleRetrievePassword}>Passwort abrufen</button>
-      {decryptedPassword && <p>Gespeichertes Passwort: {decryptedPassword}</p>}
-      {!decryptedPassword && <p>Kein Passwort gefunden</p>}
+      <button onClick={handleRetrievePassword}>Get Password</button>
+      {decryptedPassword && <p>Stored Password: {decryptedPassword}</p>}
+      {!decryptedPassword && <p>No password found for {website}</p>}
     </div>
   );
 };
-export default PasswordRetrieve;
+
+export default PasswordDisplay;

@@ -1,26 +1,27 @@
-// PasswordItem.tsx
-import React, { useState } from 'react';
+import React from 'react';
 
 interface Password {
   id: string;
   website: string;
   username: string;
-  password: string;
+  password: string;  // Entschlüsseltes Passwort wird angezeigt
 }
 
 interface PasswordItemProps {
   password: Password;
   onEdit: (password: Password) => void;
   onDelete: (id: string) => void;
+  isPasswordVisible: boolean;
+  togglePasswordVisibility: () => void;
 }
 
-const PasswordItem: React.FC<PasswordItemProps> = ({ password, onEdit, onDelete }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
-  };
-
+const PasswordItem: React.FC<PasswordItemProps> = ({
+  password,
+  onEdit,
+  onDelete,
+  isPasswordVisible,
+  togglePasswordVisibility
+}) => {
   return (
     <li className="flex justify-between items-center border-b p-4">
       <div className="flex-1">
@@ -54,4 +55,4 @@ const PasswordItem: React.FC<PasswordItemProps> = ({ password, onEdit, onDelete 
   );
 };
 
-export { PasswordItem }; // Benannter Export
+export {PasswordItem};
