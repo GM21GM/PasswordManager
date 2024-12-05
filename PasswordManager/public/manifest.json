@@ -1,18 +1,17 @@
 {
   "manifest_version": 3,
-  "name": "Passwoird Manager",
-  "description": "a password manager",
+  "name": "Password Manager",
+  "description": "A password manager extension",
   "version": "1.0.0",
   "icons": {
     "32": "/images/icon-32.png",
     "128": "/images/icon-128.png"
   },
-  "background": {},
   "action": {
-    "default_popup": "index.html"
+    "default_popup": "popup.html"  
   },
   "permissions": [
-    "scripting",
+    "storage", 
     "activeTab"
   ],
   "host_permissions": [
