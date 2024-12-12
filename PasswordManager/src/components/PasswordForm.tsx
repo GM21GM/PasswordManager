@@ -17,13 +17,19 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
   const [website, setWebsite] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [rndPassword, setRndPassword] = useState('');
+
+  const generatePassword = () => {
+    const rndPassword = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    setRndPassword(rndPassword);
+  }
 
   // Wenn ein Passwort bearbeitet wird, setze die bestehenden Werte in die Eingabefelder
   useEffect(() => {
     if (isEditing && currentPassword) {
+      setPassword(currentPassword.password);
       setWebsite(currentPassword.website);
       setUsername(currentPassword.username);
-      setPassword(currentPassword.password);
     }
   }, [isEditing, currentPassword]);
 
@@ -31,8 +37,18 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (password === '') {
+      setPassword(rndPassword);
+    }
+    if (website === '') {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs[0]) {
+          setWebsite(tabs[0].url || '');
+        }
+      });
+    }
     // Validierung: Alle Felder müssen ausgefüllt sein
-    if (!website || !username || !password) {
+    if (!website || !username) {
       alert('Bitte alle Felder ausfüllen!');
       return;
     }
@@ -47,6 +63,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
     onSubmit(newPassword);
     setWebsite('');
     setUsername('');
+    setRndPassword('');
     setPassword('');
   };
 
@@ -88,6 +105,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
           placeholder="Passwort"
           className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+        <button onClick={generatePassword}>Passwort generieren</button>
       </div>
 
       <button
