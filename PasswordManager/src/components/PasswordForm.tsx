@@ -23,6 +23,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
   const generatePassword = () => {
     const rndPassword = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     setRndPassword(rndPassword);
+    setPassword(rndPassword); // Setze das generierte Passwort in das Eingabefeld
   }
 
   // Wenn ein Passwort bearbeitet wird, setze die bestehenden Werte in die Eingabefelder
