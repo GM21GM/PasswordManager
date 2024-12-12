@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { encryptPassword, decryptPassword } from '../utils/passwordutils';
 
 interface Password {
   id: string;
@@ -27,7 +28,8 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
   // Wenn ein Passwort bearbeitet wird, setze die bestehenden Werte in die Eingabefelder
   useEffect(() => {
     if (isEditing && currentPassword) {
-      setPassword(currentPassword.password);
+      const decryptedPassword = decryptPassword(currentPassword.password, 'secret');
+      setPassword(decryptedPassword);
       setWebsite(currentPassword.website);
       setUsername(currentPassword.username);
     }
@@ -53,11 +55,14 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
       return;
     }
 
+    // Verschlüsselung des Passworts
+    const encryptedPassword = encryptPassword(password);
+
     const newPassword = {
       id: currentPassword ? currentPassword.id : Date.now().toString(),
       website,
       username,
-      password,
+      password: encryptedPassword,
     };
 
     onSubmit(newPassword);
@@ -105,7 +110,7 @@ const PasswordForm: React.FC<PasswordFormProps> = ({ isEditing, currentPassword,
           placeholder="Passwort"
           className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button onClick={generatePassword}>Passwort generieren</button>
+        <button type="button" onClick={generatePassword}>Passwort generieren</button>
       </div>
 
       <button
